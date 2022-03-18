@@ -27,8 +27,6 @@ func _update_posture():
 func _ready():
     table_pos = get_node("/root/main/tableOrigo/%sM" % name)
     base_pos = get_node("/root/main/base/%sF" % name)
-    print("I'm '%s'" % name)
-    print(table_pos, base_pos)
     _update_posture()
     show()
 

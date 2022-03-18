@@ -1,9 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://table.gd" type="Script" id=1]
 [ext_resource path="res://camera.gd" type="Script" id=2]
 [ext_resource path="res://blue.tres" type="Material" id=3]
+[ext_resource path="res://wsServer.gd" type="Script" id=4]
 [ext_resource path="res://motor.gd" type="Script" id=5]
+[ext_resource path="res://marks.gd" type="Script" id=6]
+[ext_resource path="res://lengths.gd" type="Script" id=7]
+[ext_resource path="res://pseudo.gd" type="Script" id=8]
+[ext_resource path="res://debug.gd" type="Script" id=9]
 
 [sub_resource type="SphereMesh" id=2]
 radius = 0.04
@@ -36,7 +41,64 @@ albedo_color = Color( 1, 0, 0, 1 )
 [sub_resource type="CubeMesh" id=8]
 size = Vector3( 0.04, 0.04, 1 )
 
+[sub_resource type="SphereMesh" id=9]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+albedo_color = Color( 0.65098, 0.352941, 0.352941, 0.643137 )
+
 [node name="main" type="Node"]
+
+[node name="gui" type="Node" parent="."]
+
+[node name="physical" type="Label" parent="gui"]
+margin_left = 8.0
+margin_top = 490.0
+margin_right = 163.0
+margin_bottom = 595.0
+text = "X:   0.123 
+YD: 0.123
+YI: 0.123
+YO: 0.123
+ZI: 0.123
+ZOM: 0.123"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pseudo" type="Label" parent="gui"]
+margin_left = 7.0
+margin_top = 367.0
+margin_right = 122.0
+margin_bottom = 483.0
+text = "rx = 42
+ry = 42
+rz = 42
+x  = 42
+y = 42
+z = 42
+"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debug" type="Label" parent="gui"]
+margin_left = 123.0
+margin_top = 367.0
+margin_right = 223.0
+margin_bottom = 463.0
+text = "HELLO"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="wsServer" type="Node" parent="."]
+script = ExtResource( 4 )
 
 [node name="cameraRig" type="Spatial" parent="."]
 transform = Transform( 0.848048, -0.181243, 0.497961, 0, 0.939692, 0.34202, -0.529919, -0.29005, 0.796904, 0, 0, 0 )
@@ -46,7 +108,7 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, -2.98023e-08, 0, 1, 0, 0, 0 )
 
 [node name="camera" type="Camera" parent="cameraRig/horizontal"]
-transform = Transform( 1, -2.23517e-07, -2.38419e-07, 0, 1, 5.06639e-07, 0, 2.98023e-08, 1, -5.96046e-08, 0, 2 )
+transform = Transform( 1, -2.23517e-07, -2.38419e-07, 2.98023e-08, 1, 4.76837e-07, 0, 2.98023e-08, 1, -0.32039, -0.175364, 1.58181 )
 
 [node name="center" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
@@ -184,3 +246,35 @@ mesh = SubResource( 8 )
 skeleton = NodePath("")
 material/0 = null
 script = ExtResource( 5 )
+
+[node name="marks" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="XM" type="MeshInstance" parent="marks"]
+mesh = SubResource( 9 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 10 )
+
+[node name="YDM" type="MeshInstance" parent="marks"]
+mesh = SubResource( 9 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 10 )
+
+[node name="YIM" type="MeshInstance" parent="marks"]
+mesh = SubResource( 9 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 10 )
+
+[node name="YOM" type="MeshInstance" parent="marks"]
+mesh = SubResource( 9 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 10 )
+
+[node name="ZIM" type="MeshInstance" parent="marks"]
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="ZOM" type="MeshInstance" parent="marks"]
+mesh = SubResource( 9 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 10 )

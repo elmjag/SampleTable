@@ -22,7 +22,7 @@ enum { ROTATE, TRANSLATE }
 var _action = NONE
 var _mode = ROTATE
 
-const SPEED = 0.15
+const SPEED = 0.015
 
 func _input(event):
     if not event is InputEventKey:
@@ -103,3 +103,11 @@ func _process(time_delta):
             global_translate(Vector3(0, spatial_delta, 0))
         TRANSLATE_Y_DOWN:
             global_translate(Vector3(0, -spatial_delta, 0))
+
+
+func set_posture(rot_x, rot_y, rot_z, x, y, z):
+    transform.basis = Basis.IDENTITY
+    rotate_x(rot_x)
+    rotate_y(rot_y)
+    rotate_z(rot_z)
+    set_translation(Vector3(x, y, z))
